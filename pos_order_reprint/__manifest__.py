@@ -17,7 +17,7 @@
   "name"                 :  "POS Order Reprint",
   "summary"              :  "The module allows you to reprint the receipt from customer’s previous orders in the POS session.",
   "category"             :  "Point of Sale",
-  "version"              :  "1.0",
+  "version"              :  "1.1",
   "sequence"             :  1,
   "author"               :  "Webkul Software Pvt. Ltd.",
   "license"              :  "Other proprietary",

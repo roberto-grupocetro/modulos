@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 #################################################################################
 #
 #   Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>)
@@ -62,14 +62,14 @@ class PosOrder(models.Model):
                 _logger.info("-------------stmt.payment_method_id-----------:%r",stmt.payment_method_id)
                 if stmt.amount >= 0.0:
                     currency = stmt.currency_id or stmt.company_id.currency_id
-                    name = "%s (%s)" % (stmt.payment_method_id.name, currency.name)
+                    name = "%s" % (stmt.payment_method_id.name)
                     payment_line = {
                         'amount': stmt.amount,
                         'name': name
                     }
                     paymentlines.append(payment_line)
                 else:
-                    change = stmt.amount
+                    change = stmt.amount * -1
         return {
             'paymentlines': paymentlines,
             'receipt': {
