@@ -69,7 +69,7 @@ class PosOrder(models.Model):
                     }
                     paymentlines.append(payment_line)
                 else:
-                    change = stmt.amount * -1
+                    change = stmt.amount * 1
         return {
             'paymentlines': paymentlines,
             'receipt': {
