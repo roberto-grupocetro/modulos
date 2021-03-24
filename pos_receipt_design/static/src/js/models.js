@@ -9,6 +9,33 @@ odoo.define('wk_pos_invoice_offline.models', function (require) {
     var Printer = require('point_of_sale.Printer').Printer;
     var rpc = require('web.rpc');
 
+    var SuperPosModel = models.PosModel.prototype;
+    
+    models.PosModel = models.PosModel.extend({
+        get_model: function (_name) {
+            var _index = this.models.map(function (e) {
+                return e.model;
+            }).indexOf(_name);
+            if (_index > -1) {
+                return this.models[_index];
+            }
+            return false;
+        },
+        initialize: function (session, attributes) {
+            var self = this;            
+            var partner_model = this.get_model('res.partner');
+            partner_model.fields.push('x_studio_vendedor');            
+
+            SuperPosModel.initialize.apply(this, arguments);          
+
+        },        
+        get_config: function () {
+            return this.config;
+        },        
+
+    });
+
+
     models.load_models([{
         model: 'receipt.design',
         loaded: function(self, designs) {
