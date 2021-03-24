@@ -76,6 +76,8 @@ class PosOrder(models.Model):
                 'cashier': order.user_id.name,
                 'change': change,
                 'client': order.partner_id and order.partner_id.name or False,
+                'vendedor': order.partner_id.x_studio_vendedor,
+                'tienda': order.config_id.name,
                 'date': order.date_order,
                 'orderlines': orderlines,
                 'paymentlines': paymentlines,
