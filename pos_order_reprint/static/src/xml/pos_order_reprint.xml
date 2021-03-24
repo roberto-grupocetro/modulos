@@ -44,9 +44,13 @@
             </div>
                 <br />
                 <div style='text-align:center'>
-                RECIBO DE COMPRA
-                <br /> Cajero: <t t-esc="widget.pos.cashier ? widget.pos.cashier.name : widget.pos.user.name" />
-                <br /> Cliente: <t t-esc="receipt.client" />
+                <div>RECIBO DE COMPRA</div>
+                <div><b><t t-esc="receipt.tienda" /></b></div>
+                Cajero: <t t-esc="widget.pos.cashier ? widget.pos.cashier.name : widget.pos.user.name" />
+                <t t-if="receipt.vendedor">
+                  <br /> Vendedor: <t t-esc="receipt.vendedor" />
+                </t>    
+                 <br /> <br /> Cliente: <t t-esc="receipt.client" />
             </div>
             <br />
             <br />
@@ -73,9 +77,16 @@
         
                 <t t-set="contador" t-value="0"/>
                 <tr t-foreach="receipt.orderlines" t-as="orderline">
+                <t t-if="orderline.product_name_wrapped != 'Discount'">
                     <t t-set="contador" t-value="contador+orderline.quantity"/>
+                </t>
                     <td><div style="padding-top: 5px;padding-bottom: 5px;">
+                    <t t-if="orderline.product_name_wrapped != 'Discount'">
                         <t t-esc="orderline.product_name_wrapped"/>
+                    </t>
+                    <t t-if="orderline.product_name_wrapped = 'Discount'">
+                       Descuento
+                    </t>
                    <div style="font-size: 12px;font-style: italic;color: #808080;">
                     <t t-esc='widget.format_currency(orderline.price)'/>
                         </div>
