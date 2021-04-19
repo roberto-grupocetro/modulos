@@ -62,6 +62,7 @@ class PosOrder(models.Model):
                 _logger.info("-------------stmt.payment_method_id-----------:%r",stmt.payment_method_id)
                 if stmt.amount >= 0.0:
                     currency = stmt.currency_id or stmt.company_id.currency_id
+                    tasa_cambio = stmt.currency_id.rate
                     name = "%s" % (stmt.payment_method_id.name)
                     payment_line = {
                         'amount': stmt.amount,
@@ -87,6 +88,7 @@ class PosOrder(models.Model):
                 'total_tax': order.amount_tax,
                 'total_with_tax': order.amount_total,
                 'pos_ref': order.pos_reference,
+                'tasa_cambio': tasa_cambio,
             },
             'taxincluded': False,
         }
@@ -117,3 +119,4 @@ class PosConfig(models.Model):
         if (self.wk_reprint_type == 'posbox'):
             if(self.iface_print_via_proxy == False):
                 raise ValidationError("You can not print Xml Report unless you configure the Receipt Printer settings under Hardware Proxy/PosBox!!!")
+

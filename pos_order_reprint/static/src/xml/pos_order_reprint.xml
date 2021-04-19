@@ -136,8 +136,16 @@
                 </div>
             </t>
             <div style="font-size: 20px;margin: 5px; font-weight: bold;">
-                Total
-                <span t-esc='widget.format_currency(receipt.total_with_tax)' class="pos-receipt-right-align"/>
+                Total Dólares
+                <span t-esc='widget.format_currency_no_symbol(receipt.total_with_tax)' class="pos-receipt-right-align"/>
+            </div>
+             <div style="font-size: 20px;margin: 5px; font-weight: bold;">
+                Total Córdobas
+                <span t-esc='widget.format_currency_no_symbol(receipt.total_with_tax * receipt.tasa_cambio)' class="pos-receipt-right-align"/>
+            </div>
+             <div style="font-size: 12px;margin: 5px;">
+                Tipo de Cambio
+                <span t-esc='widget.format_currency_no_symbol(receipt.tasa_cambio)' class="pos-receipt-right-align"/>
             </div>
             <br/>
 
@@ -154,8 +162,12 @@
             <br/>
             
              <div>
-                Cambio
-                <span t-esc='widget.format_currency(receipt.change)' class="pos-receipt-right-align"/>
+                Cambio USD
+                <span t-esc='widget.format_currency_no_symbol(receipt.change)' class="pos-receipt-right-align"/>
+            </div>
+             <div>
+                Cambio NIO
+                <span t-esc='widget.format_currency_no_symbol(receipt.change * receipt.tasa_cambio)' class="pos-receipt-right-align"/>
             </div>
             
            
