@@ -36,6 +36,7 @@ class PosOrder(models.Model):
                     'quantity': line.qty,
                     'tax': self._amount_line_tax(line, order.fiscal_position_id),
                     'unit_name': line.product_id.uom_id.name,
+                    'barcode': line.product_id.barcode,
                 }
                 if line.tax_ids:
                     for tax in line.tax_ids:
@@ -119,4 +120,5 @@ class PosConfig(models.Model):
         if (self.wk_reprint_type == 'posbox'):
             if(self.iface_print_via_proxy == False):
                 raise ValidationError("You can not print Xml Report unless you configure the Receipt Printer settings under Hardware Proxy/PosBox!!!")
+
 

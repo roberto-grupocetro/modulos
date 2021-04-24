@@ -77,25 +77,38 @@
         
                 <t t-set="contador" t-value="0"/>
                 <tr t-foreach="receipt.orderlines" t-as="orderline">
-                <t t-if="orderline.product_name_wrapped != 'Discount'">
-                    <t t-set="contador" t-value="contador+orderline.quantity"/>
-                </t>
-                    <td><div style="padding-top: 5px;padding-bottom: 5px;">
+                
+                    <td>
+                    
                     <t t-if="orderline.product_name_wrapped != 'Discount'">
-                        <t t-esc="orderline.product_name_wrapped"/>
+                      <div style="padding-top: 5px;padding-bottom: 5px;">
+                        <t t-set="contador" t-value="contador+orderline.quantity"/>
+                        <t t-esc="orderline.barcode"/>
+                    </div> 
+                </t>
+                    
+                    <div style="font-size: 12px;font-style: italic;color: #808080;">
+                    <t t-if="orderline.product_name_wrapped != 'Discount'">
+                    <t t-esc="orderline.product_name_wrapped"/>
                     </t>
-                    <t t-if="orderline.product_name_wrapped = 'Discount'">
+                     </div> 
+
+                    <div style="font-size: 12px;font-style: italic;color: #808080;">
+                    <t t-if="orderline.product_name_wrapped == 'Discount'">  
+                        <br/>
                        Descuento
                     </t>
+                    </div>
+
                    <div style="font-size: 12px;font-style: italic;color: #808080;">
                     <t t-esc='widget.format_currency(orderline.price)'/>
-                        </div>
+                    </div>
                         <t t-if="orderline.discount > 0">
                             <div style="font-size: 12px;font-style: italic;color: #808080;">
                                 <t t-esc="orderline.discount"/>% descuento
                             </div>
                         </t>
-                        </div>
+      
                     </td>
                     <td style="text-align:center;">
                         <div>
