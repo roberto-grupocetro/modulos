@@ -1,5 +1,4 @@
 <template id="template" xml:space="preserve">
-
     <t t-extend='OrdersScreenWidget'>
         <t t-jquery='.client-list.wk_order_list thead tr' t-operation="append">
             <th>Receipt</th>
